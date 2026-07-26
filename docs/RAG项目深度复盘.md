@@ -1,6 +1,6 @@
 # RAG 项目深度复盘
 
-> 复盘时间：2026-07-24  
+> 复盘时间：2026-07-24
 > 项目：RAG 知识库问答系统
 
 ---
@@ -127,15 +127,15 @@ generator.py    → DeepSeek 生成回答
 
 ## 四、概念掌握度检查
 
-| 概念 | 代码位置 | 应该能解释 |
-|------|----------|-----------|
-| Embedding | `rag.py:13-14` | "把文本变成 384 个数字，语义相近的向量空间距离近" |
-| 向量数据库 | `rag.py:17-18` | "存向量 + 搜相似向量，给 AI 建外部记忆" |
-| 语义检索 | `rag.py:46-51` | "不拼关键词，拼语义相似度" |
-| RAG 完整链路 | `rag.py:59-79` | "检索文档 → 拼 Prompt → LLM 基于文档回答" |
-| Chunking | `app.py:44` | "长文档切小块，每块是独立检索单元" |
-| System Prompt | `rag.py:71` | "约束 LLM 只基于给的资料回答，不瞎编" |
-| Streamlit | `app.py` 全文 | "Python 快速搭建 Web 界面的框架" |
+| 概念          | 代码位置         | 应该能解释                                        |
+| ------------- | ---------------- | ------------------------------------------------- |
+| Embedding     | `rag.py:13-14` | "把文本变成 384 个数字，语义相近的向量空间距离近" |
+| 向量数据库    | `rag.py:17-18` | "存向量 + 搜相似向量，给 AI 建外部记忆"           |
+| 语义检索      | `rag.py:46-51` | "不拼关键词，拼语义相似度"                        |
+| RAG 完整链路  | `rag.py:59-79` | "检索文档 → 拼 Prompt → LLM 基于文档回答"       |
+| Chunking      | `app.py:44`    | "长文档切小块，每块是独立检索单元"                |
+| System Prompt | `rag.py:71`    | "约束 LLM 只基于给的资料回答，不瞎编"             |
+| Streamlit     | `app.py` 全文  | "Python 快速搭建 Web 界面的框架"                  |
 
 ---
 
@@ -153,23 +153,23 @@ Week 1: CLI AI 助手                    Week 2: RAG 问答
 
 ## 六、面试可能追问
 
-| 问题 | 答案要点 |
-|------|---------|
-| 为什么用本地 Embedding？ | DeepSeek 无 Embedding API；本地免费、离线、快 |
-| 为什么选 ChromaDB？ | 轻量、Python 原生、无需 Docker、适合原型 |
-| 检索返回不相关文档怎么办？ | 调大 top_k、ReRank 二次排序、混合检索（关键词+语义） |
-| 1000 人同时用会崩在哪？ | Embedding 模型 CPU 瓶颈、ChromaDB 单机限制、API 频率限制 |
+| 问题                       | 答案要点                                                 |
+| -------------------------- | -------------------------------------------------------- |
+| 为什么用本地 Embedding？   | DeepSeek 无 Embedding API；本地免费、离线、快            |
+| 为什么选 ChromaDB？        | 轻量、Python 原生、无需 Docker、适合原型                 |
+| 检索返回不相关文档怎么办？ | 调大 top_k、ReRank 二次排序、混合检索（关键词+语义）     |
+| 1000 人同时用会崩在哪？    | Embedding 模型 CPU 瓶颈、ChromaDB 单机限制、API 频率限制 |
 
 ---
 
 ## 七、踩坑记录
 
-| 坑 | 学到的 |
-|----|--------|
-| DeepSeek 不支持 Embedding | 查官方文档 + GitHub Issues，不瞎猜 |
-| HuggingFace 被墙 | 国内镜像 `hf-mirror.com` |
-| PDF 扫描版提不出文字 | PDF 分文字型 vs 图片型 |
-| `chroma_db/` 残留旧数据 | 持久化数据库的状态管理 |
-| `st.button` + `file_uploader` 冲突 | Streamlit 每次交互都重跑整个脚本 |
-| GBK / UTF-8 编码问题 | Windows 中文系统默认 GBK，需多编码尝试 |
-| `ask()` 重复调 `search()` | 追踪数据流才能发现冗余 |
+| 坑                                     | 学到的                                 |
+| -------------------------------------- | -------------------------------------- |
+| DeepSeek 不支持 Embedding              | 查官方文档 + GitHub Issues，不瞎猜     |
+| HuggingFace 被墙                       | 国内镜像`hf-mirror.com`              |
+| PDF 扫描版提不出文字                   | PDF 分文字型 vs 图片型                 |
+| `chroma_db/` 残留旧数据              | 持久化数据库的状态管理                 |
+| `st.button` + `file_uploader` 冲突 | Streamlit 每次交互都重跑整个脚本       |
+| GBK / UTF-8 编码问题                   | Windows 中文系统默认 GBK，需多编码尝试 |
+| `ask()` 重复调 `search()`          | 追踪数据流才能发现冗余                 |

@@ -53,9 +53,9 @@ client = OpenAI(
     base_url = os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
 )
 
-def ask(question:str)->str:
+def ask(question:str,docs:list[str])->str:
     """检索+生成:RAG完整流程"""
-    docs = search(question)
+    context = "\n".join(docs)
 
     context = "\n".join(docs)
     prompt = f"""你是一个知识库助手。只根据以下参考资料回答问题。如果资料中没有答案，就说"根据现有资料，我无法回答这个问题"。

@@ -58,7 +58,7 @@ question = st.text_input("💬 输入你的问题")
 if question:
     with st.spinner("正在检索..."):
         result = search(question)
-        answer = ask(question)
+        answer = ask(question,result)
 
     st.markdown("### 🤖 回答")
     st.write(answer)
